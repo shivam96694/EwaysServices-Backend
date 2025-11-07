@@ -1,0 +1,12 @@
+# dependencies
+node_modules/
+
+# environment files
+.env
+
+# system and backup folders
+$RECYCLE.BIN/
+backup/
+Thumbs.db
+.DS_Store
+*.log
