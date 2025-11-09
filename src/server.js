@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import userRoutes from './routes/users.routes.js';
 
 // ===== Config =====
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(express.json());
 // ===== Static Files =====
 // Serve uploaded images (via multer uploads folder)
 app.use('/uploads', express.static(path.join(__dirname, 'public/images')));
+app.use('/users', userRoutes);
 
 // ===== Routes (ESM Imports) =====
 import usersRoutes from './routes/users.routes.js';
@@ -48,3 +50,4 @@ app.get('/', (req, res) => {
 // ===== Start Server =====
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+// npm run dev
