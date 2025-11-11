@@ -5,7 +5,9 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import userRoutes from './routes/users.routes.js';
-
+import userQueryRoutes from './routes/userquery.routes.js'
+import careerRoutes from "./routes/career.routes.js";
+import pool from "./config/db.js";
 // ===== Config =====
 dotenv.config();
 
@@ -19,18 +21,21 @@ const app = express();
 // ===== Middleware =====
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // ===== Static Files =====
 // Serve uploaded images (via multer uploads folder)
+
 app.use('/uploads', express.static(path.join(__dirname, 'public/images')));
 app.use('/users', userRoutes);
+app.use("/userquery", userQueryRoutes);
+app.use("/career", careerRoutes);
 
 // ===== Routes (ESM Imports) =====
 import usersRoutes from './routes/users.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import adminRoutes from './routes/admin.routes.js';
 import serviceRoutes from './routes/service.routes.js';
-
 // ===== Health Check =====
 app.get('/api/health', (req, res) => {
   res.json({ status: 'running', time: new Date() });
@@ -41,6 +46,7 @@ app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/services', serviceRoutes);
+app.use('/api/career',careerRoutes);
 
 // ===== Root Test Route =====
 app.get('/', (req, res) => {
