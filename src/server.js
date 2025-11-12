@@ -8,6 +8,8 @@ import userRoutes from './routes/users.routes.js';
 import userQueryRoutes from './routes/userquery.routes.js'
 import careerRoutes from "./routes/career.routes.js";
 import pool from "./config/db.js";
+import contactRoutes from "./routes/contact.routes.js";
+
 // ===== Config =====
 dotenv.config();
 
@@ -30,6 +32,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/images')));
 app.use('/users', userRoutes);
 app.use("/userquery", userQueryRoutes);
 app.use("/career", careerRoutes);
+app.use("/contact", contactRoutes);
 
 // ===== Routes (ESM Imports) =====
 import usersRoutes from './routes/users.routes.js';
