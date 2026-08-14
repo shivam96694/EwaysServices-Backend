@@ -22,9 +22,13 @@ const app = express();
 
 // ===== Middleware =====
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
+app.use(express.json({ limit: "20kb" }));
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: "20kb",
+  })
+);
 // ===== Static Files =====
 // Serve uploaded images (via multer uploads folder)
 
